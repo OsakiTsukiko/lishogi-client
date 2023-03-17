@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Shogi"
+run/main_scene="res://src/core/loading/loading.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="godot_shogi"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Networking="*res://src/utils/networking/networking.tscn"
+
+[display]
+
+window/subwindows/embed_subwindows=false

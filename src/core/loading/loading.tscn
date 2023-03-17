@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlfx4foo3xptw"]
+
+[ext_resource type="Shader" path="res://src/core/loading/loading.gdshader" id="1_th55f"]
+[ext_resource type="Texture2D" uid="uid://drvohcm1j484g" path="res://icon.svg" id="2_6adhl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnnsp"]
+shader = ExtResource("1_th55f")
+
+[node name="Loading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer"]
+material = SubResource("ShaderMaterial_dnnsp")
+layout_mode = 2
+texture = ExtResource("2_6adhl")

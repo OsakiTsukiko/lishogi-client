@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtxjvhr3aqoir"]
+
+[ext_resource type="Script" path="res://src/utils/token_request_window/token_request_window.gd" id="1_t8nqt"]
+
+[node name="TokenRequestWindow" type="Window"]
+title = "Auth"
+size = Vector2i(500, 300)
+exclusive = true
+unresizable = true
+script = ExtResource("1_t8nqt")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Enter Token"
+vertical_alignment = 2
+
+[node name="TokenINP" type="LineEdit" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "62GMHL3XhKLTkIbd"
+secret = true
+secret_character = "*"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Padding" type="Control" parent="Panel/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TokenBTN" type="Button" parent="Panel/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = " Get a Token "
+
+[node name="EnterBTN" type="Button" parent="Panel/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = " Enter "
+
+[node name="ErrorLabel" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.337255, 0.270588, 1)
+text = "Error!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/HBoxContainer/TokenBTN" to="." method="_on_token_btn_pressed"]
+[connection signal="pressed" from="Panel/CenterContainer/VBoxContainer/HBoxContainer/EnterBTN" to="." method="_on_enter_btn_pressed"]
