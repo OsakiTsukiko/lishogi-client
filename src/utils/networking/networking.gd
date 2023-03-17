@@ -12,6 +12,8 @@ const ENDPOINT: String = "https://lishogi.org"
 const TOKEN_SAVE_FILE: String = "secret"
 
 var token: String
+var user_info: Dictionary
+var user_preferences: Dictionary
 
 func _ready() -> void:
 	make_http_req(
@@ -93,4 +95,33 @@ func _check_token(
 			call_deferred("emit_signal", "global_error", data.error)
 		return
 	Utils.save(TOKEN_SAVE_FILE, token)
-	print(data)
+	user_info = data
+	load_profile()
+	make_http_req(
+		ENDPOINT + "/api/account/preferences",
+		PackedStringArray(["Authorization: Bearer " + token]),
+		HTTPClient.METHOD_GET,
+		{},
+		Callable(self, "_get_user_preferences")
+	)
+
+func _get_user_preferences(
+	result: int, 
+	response_code: int, 
+	headers: PackedStringArray, 
+	body: PackedByteArray
+) -> void:
+	if (response_code == 200):
+		var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
+		user_preferences = data
+		load_profile()
+
+func load_profile() -> void:
+	if (
+		user_info == {} || 
+		user_info == null || 
+		user_preferences == {} ||
+		user_preferences == null
+	): 
+		return
+	print("load profile")
