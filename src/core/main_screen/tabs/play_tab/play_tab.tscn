@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2kbuirrhwq7w"]
+
+[ext_resource type="StyleBox" uid="uid://b0otviboxipwj" path="res://assets/ui_theme/button/normal_darker.tres" id="1_8qhd1"]
+[ext_resource type="StyleBox" uid="uid://ll3styu7nhhn" path="res://assets/ui_theme/panel/darker.tres" id="1_munyi"]
+[ext_resource type="Script" path="res://src/core/main_screen/tabs/play_tab/your_games.gd" id="3_revat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqb3b"]
+
+[node name="PlayTab" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="SideBar" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tqb3b")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SideBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SideBar/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="CreateAGameBTN" type="Button" parent="HBoxContainer/SideBar/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8qhd1")
+text = "CREATE A GAME"
+
+[node name="PlayWithAFriendBTN" type="Button" parent="HBoxContainer/SideBar/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8qhd1")
+text = "PLAY WITH A FRIEND"
+
+[node name="PlayWithAComputerBTN" type="Button" parent="HBoxContainer/SideBar/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_8qhd1")
+text = "PLAY WITH A COMPUTER"
+
+[node name="MainCont" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = ExtResource("1_munyi")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainCont"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/MainCont/MarginContainer"]
+layout_mode = 2
+
+[node name="Your Games" type="Panel" parent="HBoxContainer/MainCont/MarginContainer/TabContainer"]
+layout_mode = 2
+script = ExtResource("3_revat")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games/MarginContainer"]
+layout_mode = 2
+
+[node name="GamesCont" type="VBoxContainer" parent="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+
+[node name="Timer" type="Timer" parent="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games"]
+process_callback = 0
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games/Timer" to="HBoxContainer/MainCont/MarginContainer/TabContainer/Your Games" method="_on_timer_timeout"]

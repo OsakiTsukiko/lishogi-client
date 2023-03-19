@@ -1,0 +1,129 @@
+[gd_scene load_steps=5 format=3 uid="uid://duwqukiihr3l"]
+
+[ext_resource type="StyleBox" uid="uid://cwmnose68afyu" path="res://assets/ui_theme/panel/darker_rounder.tres" id="1_dl8oe"]
+[ext_resource type="Texture2D" uid="uid://cd3dxeasx7uel" path="res://assets/icons/sente.svg" id="2_8pxqy"]
+[ext_resource type="Script" path="res://src/core/main_screen/tabs/play_tab/game.gd" id="2_oup7e"]
+[ext_resource type="Texture2D" uid="uid://bsld6mrao8qeb" path="res://assets/icons/gote.svg" id="3_itdjy"]
+
+[node name="Game" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_dl8oe")
+script = ExtResource("2_oup7e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="YourTurn" type="Label" parent="MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.894118, 0, 1)
+text = " ▶"
+
+[node name="SenteIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Sente"
+texture = ExtResource("2_8pxqy")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GoteIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Gote"
+texture = ExtResource("3_itdjy")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="OpponentUsername" type="LinkButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Opponent Username"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "USERNAME"
+underline = 2
+
+[node name="Separator01" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "•"
+
+[node name="OpponentRating" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Opponent Rating"
+mouse_filter = 0
+text = "2000"
+
+[node name="Separator02" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "•"
+
+[node name="Rated" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Opponent Rating"
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.960784, 0.815686, 0, 1)
+text = "Rated"
+
+[node name="Separator03" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "•"
+
+[node name="Variant" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Variant"
+mouse_filter = 0
+text = "Standard"
+
+[node name="Separator04" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "•"
+
+[node name="Speed" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Speed"
+mouse_filter = 0
+text = "Correspondennce"
+visible_characters = 3
+visible_ratio = 0.2
+
+[node name="Separator05" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "•"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLeft" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Speed"
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.960784, 0.815686, 0, 1)
+text = "TL"
+
+[node name="Separator06" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "•"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenBTN" type="LinkButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.894118, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.709804, 0.894118, 0, 1)
+theme_override_colors/font_hover_color = Color(0.792157, 0.996078, 0.411765, 1)
+text = "OPEN"
+underline = 2
+
+[node name="TimeLeftTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/OpponentUsername" to="." method="_on_opponent_username_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/OpenBTN" to="." method="_on_open_btn_pressed"]

@@ -4,6 +4,7 @@ extends Node
 
 const token_request_window_scene: Resource = preload("res://src/utils/token_request_window/token_request_window.tscn")
 const error_scene: Resource = preload("res://src/core/error/error.tscn")
+const main_screen: Resource = preload("res://src/core/main_screen/main_screen.tscn")
 
 signal global_error
 signal specific_error
@@ -14,6 +15,8 @@ const TOKEN_SAVE_FILE: String = "secret"
 var token: String
 var user_info: Dictionary
 var user_preferences: Dictionary
+
+var is_debug: bool = OS.is_debug_build()
 
 func _ready() -> void:
 	make_http_req(
@@ -88,12 +91,13 @@ func _check_token(
 	headers: PackedStringArray, 
 	body: PackedByteArray
 ) -> void:
-	var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
 	if (response_code != 200):
+		var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
 		load_token_request_window()
 		if (data.has("error")):
 			call_deferred("emit_signal", "global_error", data.error)
 		return
+	var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
 	Utils.save(TOKEN_SAVE_FILE, token)
 	user_info = data
 	load_profile()
@@ -124,4 +128,7 @@ func load_profile() -> void:
 		user_preferences == null
 	): 
 		return
-	print("load profile")
+	get_tree().change_scene_to_packed(main_screen)
+	if (is_debug):
+		Utils.save_debug("user_info", user_info)
+		Utils.save_debug("user_preferences", user_preferences)

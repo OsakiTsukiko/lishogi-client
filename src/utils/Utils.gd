@@ -13,3 +13,8 @@ static func load_save(file_name: String):
 		file.close()
 		return data
 	return null
+
+static func save_debug(file_name: String, data) -> void:
+	var file := FileAccess.open("user://" + file_name + ".debug", FileAccess.WRITE)
+	file.store_string(var_to_str(data))
+	file.close()
