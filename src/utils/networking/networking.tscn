@@ -6,3 +6,5 @@
 script = ExtResource("1_cdc3o")
 
 [node name="HTTPCont" type="Node" parent="."]
+
+[node name="GamesCont" type="Node" parent="."]

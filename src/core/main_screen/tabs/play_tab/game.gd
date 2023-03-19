@@ -111,4 +111,4 @@ func _on_opponent_username_pressed():
 	pass
 
 func _on_open_btn_pressed():
-	pass
+	Networking.open_game(full_id, game_id)

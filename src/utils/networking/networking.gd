@@ -1,10 +1,12 @@
 extends Node
 
 @onready var http_cont: Node = $HTTPCont
+@onready var games_cont: Node = $GamesCont
 
 const token_request_window_scene: Resource = preload("res://src/utils/token_request_window/token_request_window.tscn")
 const error_scene: Resource = preload("res://src/core/error/error.tscn")
 const main_screen: Resource = preload("res://src/core/main_screen/main_screen.tscn")
+const game_scene: Resource = preload("res://src/core/main_screen/game/game.tscn")
 
 signal global_error
 signal specific_error
@@ -18,7 +20,10 @@ var user_preferences: Dictionary
 
 var is_debug: bool = OS.is_debug_build()
 
+var opened_games: Array[Node] = []
+
 func _ready() -> void:
+	DisplayServer.window_set_min_size(Vector2(1152, 648))
 	make_http_req(
 		ENDPOINT,
 		PackedStringArray([]),
@@ -132,3 +137,12 @@ func load_profile() -> void:
 	if (is_debug):
 		Utils.save_debug("user_info", user_info)
 		Utils.save_debug("user_preferences", user_preferences)
+
+func open_game(full_id: String, game_id: String):
+	for game in opened_games:
+		if (game.full_id == full_id):
+			return
+	
+	var game: Node = game_scene.instantiate()
+	game.init(full_id, game_id)
+	games_cont.add_child(game)
