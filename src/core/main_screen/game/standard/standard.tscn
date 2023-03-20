@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxy32ds7nytpw"]
+[gd_scene load_steps=2 format=3 uid="uid://bdypm2w5pid76"]
 
-[ext_resource type="Script" path="res://src/core/main_screen/game/game.gd" id="1_m1vkb"]
+[ext_resource type="Script" path="res://src/core/main_screen/game/standard/standard.gd" id="1_b0msc"]
 
-[node name="Game" type="Window"]
+[node name="Standard" type="Window"]
+title = "Shodi"
 size = Vector2i(1152, 648)
-script = ExtResource("1_m1vkb")
+script = ExtResource("1_b0msc")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15

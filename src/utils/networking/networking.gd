@@ -6,7 +6,8 @@ extends Node
 const token_request_window_scene: Resource = preload("res://src/utils/token_request_window/token_request_window.tscn")
 const error_scene: Resource = preload("res://src/core/error/error.tscn")
 const main_screen: Resource = preload("res://src/core/main_screen/main_screen.tscn")
-const game_scene: Resource = preload("res://src/core/main_screen/game/game.tscn")
+
+const standard_game_scene: Resource = preload("res://src/core/main_screen/game/standard/standard.tscn")
 
 signal global_error
 signal specific_error
@@ -138,11 +139,14 @@ func load_profile() -> void:
 		Utils.save_debug("user_info", user_info)
 		Utils.save_debug("user_preferences", user_preferences)
 
-func open_game(full_id: String, game_id: String):
+func open_game(game_btn: Node):
 	for game in opened_games:
-		if (game.full_id == full_id):
+		if (game.full_id == game_btn.full_id):
+			game.grab_focus()
 			return
 	
-	var game: Node = game_scene.instantiate()
-	game.init(full_id, game_id)
-	games_cont.add_child(game)
+	if (game_btn.variant_key == "standard"):
+		var game: Node = standard_game_scene.instantiate()
+		game.init(game_btn)
+		games_cont.add_child(game)
+		opened_games.push_back(game)

@@ -2,6 +2,7 @@ extends Window
 
 @onready var network_clock: Timer = $NetworkClock
 
+var game_btn: Node
 var full_id: String
 var game_id: String
 
@@ -12,13 +13,14 @@ var headers: PackedStringArray = []
 var stage: String = "NONE"
 
 func init(
-	full_id: String,
-	game_id: String
+	game_btn: Node
 ):
-	self.full_id = full_id
-	self.game_id = game_id
+	self.game_btn = game_btn
+	self.full_id = game_btn.full_id
+	self.game_id = game_btn.game_id
 
 func _ready():
+	title = game_btn.opponent_username
 	headers.push_back("Authorization: Bearer " + Networking.token)
 	
 	http = HTTPClient.new()
