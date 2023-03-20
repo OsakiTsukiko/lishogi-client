@@ -140,6 +140,7 @@ func load_profile() -> void:
 		Utils.save_debug("user_preferences", user_preferences)
 
 func open_game(game_btn: Node):
+	print(game_btn)
 	for game in opened_games:
 		if (game.full_id == game_btn.full_id):
 			game.grab_focus()

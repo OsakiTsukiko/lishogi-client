@@ -34,8 +34,10 @@ func _get_my_ongoing_games(
 		if (Networking.is_debug):
 			Utils.save_debug("my_ongoing_games", data)
 		
-		for index in range(0, data.nowPlaying.size()):
-			var game: Dictionary = data.nowPlaying[index]
+		for child in games_cont.get_children():
+			child.queue_free()
+		
+		for game in data.nowPlaying:
 			var game_node: Node = game_node_scene.instantiate()
 			
 			var opponent_rating: int = 0
@@ -60,9 +62,4 @@ func _get_my_ongoing_games(
 				game.sfen
 			)
 			
-			for old_game in games_cont.get_children():
-				if (old_game.full_id == game.fullId):
-					old_game.queue_free()
-			
 			games_cont.add_child(game_node)
-			games_cont.move_child(game_node, index)
