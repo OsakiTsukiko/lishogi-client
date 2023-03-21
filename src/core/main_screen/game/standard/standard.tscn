@@ -1,18 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdypm2w5pid76"]
+[gd_scene load_steps=3 format=3 uid="uid://bdypm2w5pid76"]
 
 [ext_resource type="Script" path="res://src/core/main_screen/game/standard/standard.gd" id="1_b0msc"]
+[ext_resource type="PackedScene" uid="uid://5jsxu7hkamx3" path="res://src/core/main_screen/game/standard/main_cont.tscn" id="2_7kvel"]
 
 [node name="Standard" type="Window"]
 title = "Shodi"
 size = Vector2i(1152, 648)
 script = ExtResource("1_b0msc")
 
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainCont" parent="." instance=ExtResource("2_7kvel")]
 
 [node name="NetworkClock" type="Timer" parent="."]
 process_callback = 0

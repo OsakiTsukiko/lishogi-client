@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://5jsxu7hkamx3"]
+
+[ext_resource type="StyleBox" uid="uid://ll3styu7nhhn" path="res://assets/ui_theme/panel/darker.tres" id="1_km08p"]
+[ext_resource type="Script" path="res://src/core/main_screen/game/standard/main_cont.gd" id="1_tj8h0"]
+[ext_resource type="Script" path="res://src/core/main_screen/game/standard/BoardContainer.gd" id="1_x4t3y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spexw"]
+
+[node name="MainCont" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tj8h0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MainBoardContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_spexw")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainBoardContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/MainBoardContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BoardContainer" type="PanelContainer" parent="HBoxContainer/MainBoardContainer/MarginContainer/CenterContainer"]
+custom_minimum_size = Vector2(495, 495)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_km08p")
+script = ExtResource("1_x4t3y")
+
+[node name="Board" type="GridContainer" parent="HBoxContainer/MainBoardContainer/MarginContainer/CenterContainer/BoardContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 9
+
+[node name="ControlsContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
